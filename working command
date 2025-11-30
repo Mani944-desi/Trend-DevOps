@@ -1,0 +1,28 @@
+*********************************************
+
+ubuntu@ip-172-31-31-13:~$ kubectl get svc -o wide
+NAME                 TYPE           CLUSTER-IP       EXTERNAL-IP                                                               PORT(S)        AGE    SELECTOR
+kubernetes           ClusterIP      10.100.0.1       <none>                                                                    443/TCP        12h    <none>
+trend-frontend-lb    LoadBalancer   10.100.7.97      aa2b242d9f0f345a6813ec24443fb2aa-877831564.us-west-2.elb.amazonaws.com    80:30861/TCP   139m   app=trend-frontend
+trend-frontend-svc   LoadBalancer   10.100.109.255   a59e3f2be7017419eb4bd16c5b3690a3-1449576707.us-west-2.elb.amazonaws.com   80:32548/TCP   11h    app=trend-frontend
+ubuntu@ip-172-31-31-13:~$ 
+
+****************************************************************
+
+ubuntu@ip-172-31-31-13:~$ kubectl get pods -o wide
+NAME                              READY   STATUS    RESTARTS   AGE   IP              NODE                                           NOMINATED NODE   READINESS GATES
+trend-frontend-84db55d66c-htwz2   1/1     Running   0          14m   192.168.34.32   ip-192-168-48-192.us-west-2.compute.internal   <none>           <none>
+trend-frontend-84db55d66c-tncbw   1/1     Running   0          14m   192.168.20.74   ip-192-168-18-253.us-west-2.compute.internal   <none>           <none>
+ubuntu@ip-172-31-31-13:~$ 
+
+
+************************************************************************
+
+2025/11/30 05:12:56 [error] 30#30: *65 open() "/usr/share/nginx/html/undefined/images/p_img4.png" failed (2: No such file or directory), client: 192.168.48.192, server: localhost, request: "GET /undefined/images/p_img4.png HTTP/1.1", host: "a59e3f2be7017419eb4bd16c5b3690a3-1449576707.us-west-2.elb.amazonaws.com", referrer: "http://a59e3f2be7017419eb4bd16c5b3690a3-1449576707.us-west-2.elb.amazonaws.com/"
+192.168.48.192 - - [30/Nov/2025:05:12:56 +0000] "GET /undefined/images/p_img4.png HTTP/1.1" 404 555 "http://a59e3f2be7017419eb4bd16c5b3690a3-1449576707.us-west-2.elb.amazonaws.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
+192.168.48.192 - - [30/Nov/2025:05:12:56 +0000] "GET /undefined/images/p_img51.png HTTP/1.1" 404 555 "http://a59e3f2be7017419eb4bd16c5b3690a3-1449576707.us-west-2.elb.amazonaws.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
+2025/11/30 05:12:56 [error] 30#30: *66 open() "/usr/share/nginx/html/undefined/images/p_img51.png" failed (2: No such file or directory), client: 192.168.48.192, server: localhost, request: "GET /undefined/images/p_img51.png HTTP/1.1", host: "a59e3f2be7017419eb4bd16c5b3690a3-1449576707.us-west-2.elb.amazonaws.com", referrer: "http://a59e3f2be7017419eb4bd16c5b3690a3-1449576707.us-west-2.elb.amazonaws.com/"
+2025/11/30 05:12:56 [error] 30#30: *65 open() "/usr/share/nginx/html/undefined/images/p_img48.png" failed (2: No such file or directory), client: 192.168.48.192, server: localhost, request: "GET /undefined/images/p_img48.png HTTP/1.1", host: "a59e3f2be7017419eb4bd16c5b3690a3-1449576707.us-west-2.elb.amazonaws.com", referrer: "http://a59e3f2be7017419eb4bd16c5b3690a3-1449576707.us-west-2.elb.amazonaws.com/"
+192.168.48.192 - - [30/Nov/2025:05:12:56 +0000] "GET /undefined/images/p_img48.png HTTP/1.1" 404 555 "http://a59e3f2be7017419eb4bd16c5b3690a3-1449576707.us-west-2.elb.amazonaws.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
+2025/11/30 05:12:56 [error] 30#30: *66 open() "/usr/share/nginx/html/undefined/images/p_img45.png" failed (2: No such file or directory), client: 192.168.48.192, server: localhost, request: "GET /undefined/images/p_img45.png HTTP/1.1", host: "a59e3f2be7017419eb4bd16c5b3690a3-1449576707.us-west-2.elb.amazonaws.com", referrer: "http://a59e3f2be7017419eb4bd16c5b3690a3-1449576707.us-west-2.elb.amazonaws.com/"
+192.168.48.192 - - [30/Nov/2025:05:12:56 +0000] "GET /undefined/images/p_img45.png HTTP/1.1" 404 555 "http://a59e3f2be7017419eb4bd16c5b3690a3-1449576707.us-west-2.elb.amazonaws.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36" "-"
