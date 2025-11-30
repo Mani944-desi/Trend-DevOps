@@ -2,11 +2,12 @@ pipeline {
   agent any
 
   environment {
-    DOCKER_USER  = 'mani944desi'
-    IMAGE_NAME   = "${DOCKER_USER}/trend-frontend"
-    AWS_REGION   = "us-west-2"
+    DOCKER_CMD  = '/usr/bin/docker'          // full path to docker
+    DOCKER_USER = 'mani944desi'
+    IMAGE_NAME  = "${DOCKER_USER}/trend-frontend"
+    AWS_REGION  = "us-west-2"
     CLUSTER_NAME = "trend-eks"
-    KUBECONFIG   = "/var/jenkins_home/.kube/config"
+    KUBECONFIG  = "/var/jenkins_home/.kube/config"
   }
 
   stages {
@@ -18,7 +19,7 @@ pipeline {
 
     stage('Build Docker Image') {
       steps {
-        sh "docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ."
+        sh "${DOCKER_CMD} build -t ${IMAGE_NAME}:${BUILD_NUMBER} ."
       }
     }
 
@@ -27,14 +28,14 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'dockerhub-creds',
                                           usernameVariable: 'DH_USER',
                                           passwordVariable: 'DH_PASS')]) {
-          sh "echo $DH_PASS | docker login -u $DH_USER --password-stdin"
+          sh "echo $DH_PASS | ${DOCKER_CMD} login -u $DH_USER --password-stdin"
         }
       }
     }
 
     stage('Push Image') {
       steps {
-        sh "docker push ${IMAGE_NAME}:${BUILD_NUMBER}"
+        sh "${DOCKER_CMD} push ${IMAGE_NAME}:${BUILD_NUMBER}"
       }
     }
 
