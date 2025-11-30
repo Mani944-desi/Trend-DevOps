@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trend-frontend
+  labels:
+    app: trend-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: trend-frontend
+  template:
+    metadata:
+      labels:
+        app: trend-frontend
+    spec:
+      containers:
+        - name: trend-frontend
+          image: mani944desi/trend-frontend:latest  # will be overwritten by Jenkins sed
+          ports:
+            - containerPort: 80

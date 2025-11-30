@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: trend-frontend-lb
+  labels:
+    app: trend-frontend
+spec:
+  type: LoadBalancer
+  selector:
+    app: trend-frontend
+  ports:
+    - port: 80
+      targetPort: 80
